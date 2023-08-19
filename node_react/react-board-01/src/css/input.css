@@ -1,0 +1,60 @@
+section.main.input {
+  width: 70%;
+  height: 70%;
+  border: 1px solid #ddd;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+div.input {
+  width: 90%;
+  display: flex;
+}
+
+div.input label,
+div.input input,
+div.input textarea {
+  padding: 10px;
+}
+
+div.input label {
+  flex: 1;
+  border: 1px solid black;
+}
+
+div.input input,
+textarea {
+  flex: 3;
+  background-color: #e3dcdc;
+  border: 1px solid black;
+}
+
+div.input input:focus,
+textarea:focus {
+  background-color: azure;
+}
+
+div.input textarea {
+  height: 15rem;
+}
+
+div.input button {
+  margin: 10px 10px 0 0;
+  border: none;
+  background-color: antiquewhite;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+div.input button a {
+  color: black;
+}
+
+div.input button:hover {
+  background-color: bisque;
+  cursor: pointer;
+}
