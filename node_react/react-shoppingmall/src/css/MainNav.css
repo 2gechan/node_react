@@ -1,0 +1,31 @@
+header {
+  display: flex;
+  padding: 3rem;
+  border-bottom: 1px solid #ddd;
+  height: 15%;
+}
+
+header h1 {
+  flex: 2;
+  color: #aaa;
+  margin-right: 100px;
+}
+
+ul.main.menu {
+  flex: 8;
+  list-style: none;
+  /* border: 1px solid green; */
+  height: 50px;
+  display: flex;
+}
+
+ul.main.menu li {
+  font-size: 20px;
+  padding: 6px;
+  margin: 8px 15px;
+}
+
+ul.main.menu li:hover {
+  cursor: pointer;
+  border-bottom: 2px solid #ddd;
+}
