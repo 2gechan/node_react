@@ -14,8 +14,14 @@ const MainNav = () => {
         </NavLink>
         <li>TOP</li>
         <li>BOTTOM</li>
+        <li>CART</li>
         <li>후기</li>
         <li>고객센터</li>
+        <NavLink to="/login">
+          <li>LOGIN</li>
+        </NavLink>
+
+        <li>JOIN</li>
       </ul>
     </>
   );
