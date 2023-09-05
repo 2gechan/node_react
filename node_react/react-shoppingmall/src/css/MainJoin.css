@@ -1,0 +1,41 @@
+div.main.joinForm {
+  width: 50%;
+
+  margin: 5rem auto;
+  /* border: 1px solid green; */
+}
+
+div.join {
+  /* border: 1px solid gray; */
+  width: 100%;
+  margin: 10px 0;
+  display: flex;
+}
+
+div.join label {
+  text-align: left;
+  flex: 1;
+  /* border: 1px solid red; */
+}
+
+div.join input {
+  /* border: 1px solid salmon; */
+  width: 15rem;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
+  flex: 4;
+}
+
+div.join.button button {
+  background-color: #eee;
+  margin: 10px auto;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+div.join.button button:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}

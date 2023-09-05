@@ -29,3 +29,9 @@ ul.main.menu li:hover {
   cursor: pointer;
   border-bottom: 2px solid #ddd;
 }
+
+li.register div {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}

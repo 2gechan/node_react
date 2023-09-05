@@ -3,6 +3,7 @@ import MainNav from "./components/MainNav";
 import "./css/App.css";
 import "./css/MainNav.css";
 import "./css/User.css";
+import "./css/MainJoin.css";
 
 function App() {
   return (
