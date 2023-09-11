@@ -27,7 +27,7 @@ const MainNav = () => {
         <li>후기</li>
         <li>고객센터</li>
         <li className="register" onMouseOverCapture={mouseOver}>
-          REGISTER
+          MEMBER
           <div
             style={{ display: divisible ? "flex" : "none" }}
             onMouseLeave={mouseLeave}
@@ -38,6 +38,9 @@ const MainNav = () => {
 
             <NavLink to="/login">
               <span>LOGIN</span>
+            </NavLink>
+            <NavLink to="/mypage">
+              <span>MYPAGE</span>
             </NavLink>
           </div>
         </li>

@@ -1,8 +1,20 @@
-const ShopJoin = ({ user, setUser }) => {
-  const inputChangeHandler = (e) => {
-    const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
-    console.log(name, value);
+import { useNavigate } from "react-router-dom";
+
+const ShopJoin = (props) => {
+  const { user, axios, joinInputChangeHandler } = props;
+  const navigate = useNavigate();
+
+  const joinButtonClickHandler = async (e) => {
+    console.log(user);
+
+    const response = await axios.post("/join", user);
+
+    console.log(response.status);
+    if (response.status === 200) {
+      navigate("/");
+    } else {
+      alert("회원가입에 실패했습니다.");
+    }
   };
 
   return (
@@ -12,8 +24,8 @@ const ShopJoin = ({ user, setUser }) => {
         <input
           type="text"
           placeholder="ID"
-          name="u_id"
-          onChange={inputChangeHandler}
+          name="su_id"
+          onChange={joinInputChangeHandler}
         />
       </div>
       <div className="join input">
@@ -21,8 +33,8 @@ const ShopJoin = ({ user, setUser }) => {
         <input
           type="password"
           placeholder="PASSWORD"
-          name="u_password"
-          onChange={inputChangeHandler}
+          name="su_password"
+          onChange={joinInputChangeHandler}
         />
       </div>
       <div className="join input">
@@ -30,8 +42,8 @@ const ShopJoin = ({ user, setUser }) => {
         <input
           type="text"
           placeholder="NAME"
-          name="u_name"
-          onChange={inputChangeHandler}
+          name="su_name"
+          onChange={joinInputChangeHandler}
         />
       </div>
       <div className="join input">
@@ -39,12 +51,14 @@ const ShopJoin = ({ user, setUser }) => {
         <input
           type="text"
           placeholder="PHONE NUMBER"
-          name="u_tel"
-          onChange={inputChangeHandler}
+          name="su_tel"
+          onChange={joinInputChangeHandler}
         />
       </div>
       <div className="join button">
-        <button type="button">회원가입</button>
+        <button type="button" onClick={joinButtonClickHandler}>
+          회원가입
+        </button>
       </div>
     </div>
   );
