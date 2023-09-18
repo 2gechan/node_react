@@ -1,10 +1,35 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const MainNav = () => {
+  const navigate = useNavigate();
+  const [logout, setlogout] = useState(false);
   const [divisible, setDivisible] = useState(false);
   const mouseOver = () => {
     setDivisible(true);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.post("/session");
+      const result = await response.data;
+
+      if (!result) {
+        console.log("로그인정보X");
+        setlogout(false);
+      } else {
+        console.log("로그인정보O");
+        setlogout(true);
+      }
+    };
+    fetchData();
+  });
+
+  const logoutClick = async () => {
+    setlogout(false);
+    await axios.post("/logout");
+    navigate("/");
   };
 
   const mouseLeave = () => {
@@ -35,15 +60,22 @@ const MainNav = () => {
             <NavLink to="/join">
               <span>JOIN</span>
             </NavLink>
+            {logout ? (
+              <span onClick={logoutClick}>LOGOUT</span>
+            ) : (
+              <NavLink to="/login">
+                <span>LOGIN</span>
+              </NavLink>
+            )}
 
-            <NavLink to="/login">
-              <span>LOGIN</span>
-            </NavLink>
             <NavLink to="/mypage">
               <span>MYPAGE</span>
             </NavLink>
           </div>
         </li>
+        <NavLink to="/cart">
+          <li>CART</li>
+        </NavLink>
       </ul>
     </>
   );

@@ -1,8 +1,6 @@
 package com.gechan.demo.models;
 
-import com.sun.istack.NotNull;
 import lombok.*;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 
@@ -13,15 +11,17 @@ import javax.persistence.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShopUser {
+public class UserDto {
 
     @Id // Primary key
-    private String su_id;
+    private String user_id;
 
     @Column(nullable = false)
-    private String su_password;
+    private String user_password;
     @Column(nullable = false)
-    private String su_name;
+    private String user_name;
     @Column(nullable = false)
-    private String su_tel;
+    private String user_tel;
+    @Column(nullable = false)
+    private String user_role; // 관리자, 판매자, 구매자
 }

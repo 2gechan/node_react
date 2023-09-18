@@ -1,13 +1,12 @@
 package com.gechan.demo.service.impl;
 
 import com.gechan.demo.UserRepository;
-import com.gechan.demo.models.ShopUser;
+import com.gechan.demo.models.UserDto;
 import com.gechan.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,34 +19,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<ShopUser> selectAll() {
+    public List<UserDto> selectAll() {
         return null;
     }
 
     @Override
-    public int insert(ShopUser user) {
+    public int insert(UserDto user) {
         this.userRepository.save(user);
         return 0;
     }
 
     @Override
-    public ShopUser findById(String su_id) {
-        ShopUser user = this.userRepository.findById(su_id).orElse(null);
+    public UserDto findById(String user_id) {
+        UserDto user = this.userRepository.findById(user_id).orElse(null);
         return user;
     }
 
     @Override
-    public int delete(String su_id) {
+    public int delete(String user_id) {
         return 0;
     }
 
     @Override
-    public ShopUser login(String su_id, String su_password) {
-        ShopUser user;
+    public UserDto login(String user_id, String user_password) {
+        UserDto user;
         try {
-            user = this.findById(su_id);
+            user = this.findById(user_id);
             if (user != null) {
-                if (user.getSu_password().equals(su_password)) {
+                if (user.getUser_password().equals(user_password)) {
                     return user;
                 } else {
                     return null;

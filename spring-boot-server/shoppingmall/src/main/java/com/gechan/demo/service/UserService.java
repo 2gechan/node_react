@@ -1,20 +1,18 @@
 package com.gechan.demo.service;
 
-import com.gechan.demo.models.ShopUser;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.gechan.demo.models.UserDto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
 
-    public List<ShopUser> selectAll();
+    public List<UserDto> selectAll();
 
-    public int insert(ShopUser user);
+    public int insert(UserDto user);
 
-    public ShopUser findById(String su_id);
+    public UserDto findById(String user_id);
 
-    public int delete(String su_id);
+    public int delete(String user_id);
 
-    public ShopUser login(String su_id, String su_password);
+    public UserDto login(String user_id, String user_password);
 }

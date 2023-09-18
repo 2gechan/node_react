@@ -24,7 +24,7 @@ const ShopJoin = (props) => {
         <input
           type="text"
           placeholder="ID"
-          name="su_id"
+          name="user_id"
           onChange={joinInputChangeHandler}
         />
       </div>
@@ -33,7 +33,7 @@ const ShopJoin = (props) => {
         <input
           type="password"
           placeholder="PASSWORD"
-          name="su_password"
+          name="user_password"
           onChange={joinInputChangeHandler}
         />
       </div>
@@ -42,7 +42,7 @@ const ShopJoin = (props) => {
         <input
           type="text"
           placeholder="NAME"
-          name="su_name"
+          name="user_name"
           onChange={joinInputChangeHandler}
         />
       </div>
@@ -51,7 +51,7 @@ const ShopJoin = (props) => {
         <input
           type="text"
           placeholder="PHONE NUMBER"
-          name="su_tel"
+          name="user_tel"
           onChange={joinInputChangeHandler}
         />
       </div>

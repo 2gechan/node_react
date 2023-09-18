@@ -8,10 +8,12 @@ import ShopJoin from "../components/user/ShopJoin";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import MyPage from "../components/user/MyPage";
+import ShopCart from "../components/user/ShopCart";
 // import { InitUser } from "../models/InitUser";
 
 const MainRouter = () => {
   const [user, setUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
 
   const joinInputChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -31,7 +33,14 @@ const MainRouter = () => {
         { path: "/best", element: <BestItem /> },
         {
           path: "/login",
-          element: <ShopLogin axios={axios} useState={useState} />,
+          element: (
+            <ShopLogin
+              axios={axios}
+              useState={useState}
+              // currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+            />
+          ),
         },
         {
           path: "/join",
@@ -44,7 +53,18 @@ const MainRouter = () => {
             />
           ),
         },
-        { path: "/mypage", element: <MyPage /> },
+        {
+          path: "/mypage",
+          element: (
+            <MyPage
+              axios={axios}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+              useEffect={useEffect}
+            />
+          ),
+        },
+        { path: "/cart", element: <ShopCart /> },
       ],
     },
   ]);
