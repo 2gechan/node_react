@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# 2023-09-19 ~
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## dependency 설치
 
-## Available Scripts
+```bash
+npm install react-router-dom
+npm install axios
+npm install redux
+npm install @reduxjs/toolkit react-redux
+```
 
-In the project directory, you can run:
+## 주요 기능
 
-### `npm start`
+1. 회원가입
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 유저에 따라 role 부여(관리자, 판매자, 구매자)
+- 관리자 계정은 처음 생성한 계정이 관리자 계정
+- 판매자, 구매자 구분은 회원가입 폼에서 선택
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. 로그인
 
-### `npm test`
+- 로그인 후 role을 확인하여 각자 role에 맞는 화면 구성
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. 각 role에 따른 화면 구성
 
-### `npm run build`
+- 관리자 : 모든 컨텐츠 삭제 가능(상품, 후기 등)
+- 판매자 : 상품 등록, 판매 내역, 후기 관리
+- 구매자 : 장바구니, 상품 구매, 구매 내역, 구매 취소, 관심 상품
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. 상품 리스트
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 카테고리 : 상품 등록 시 카테고리 설정으로 페이지 나열
+- 상품 선택 : 상품 클릭시 디테일 페이지로 이동, 수량 선택, 구매, 관심 상품 등록, 후기
+- 정렬 : 가격순 정렬, 관심 상품 높낮이 순
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. 장바구니
 
-### `npm run eject`
+- 로그인 시 데이터베이스에서 조회
+- 상품 페이지로 이동할 수 있거나, 바로 구매 화면으로 이동
+- 장바구니에 있는 상품 총 금액
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 데이터베이스
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 유저 테이블(shop_user) : 아이디(PK), 패스워드, 이름, 전화번호, 권한
+- 상품 테이블(shop_item) : 상품 seq(PK), 이름, 가격, 판매 가능 수량, 현재 판매 유무(품절?), 관심 등록 수, 판매자 아이디, 대표 이미지
+- 후기 테이블(shop_review) : 후기 seq(PK), 작성자 아이디, 내용, 상품 번호
+- 장바구니 테이블(shop_cart) : 장바구니 seq(PK), 아이디, 상품 seq, 후기내용
+- 구매, 판매 내역 테이블(shop_trade) : 내역 seq(PK), 구매자 아이디, 판매자 아이디, 구매(판매) 상품, 개당 가격, 수량, 총 금액, 구매(판매) 일자

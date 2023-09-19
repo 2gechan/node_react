@@ -30,23 +30,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto findById(String user_id) {
-        UserDto user = this.userRepository.findById(user_id).orElse(null);
+    public UserDto findById(String su_id) {
+        UserDto user = this.userRepository.findById(su_id).orElse(null);
         return user;
     }
 
     @Override
-    public int delete(String user_id) {
+    public int delete(String su_id) {
         return 0;
     }
 
     @Override
-    public UserDto login(String user_id, String user_password) {
+    public UserDto login(String su_id, String su_password) {
         UserDto user;
         try {
-            user = this.findById(user_id);
+            user = this.findById(su_id);
             if (user != null) {
-                if (user.getUser_password().equals(user_password)) {
+                if (user.getSu_password().equals(su_password)) {
                     return user;
                 } else {
                     return null;

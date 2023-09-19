@@ -10,9 +10,9 @@ public interface UserService {
 
     public int insert(UserDto user);
 
-    public UserDto findById(String user_id);
+    public UserDto findById(String su_id);
 
-    public int delete(String user_id);
+    public int delete(String su_id);
 
-    public UserDto login(String user_id, String user_password);
+    public UserDto login(String su_id, String su_password);
 }

@@ -56,7 +56,7 @@ public class UserController {
     public UserDto login(@RequestBody UserDto user, HttpSession httpSession) {
 
         System.out.println("로그인 정보 = " + user.toString());
-        UserDto loginUser = userService.login(user.getUser_id(), user.getUser_password());
+        UserDto loginUser = userService.login(user.getSu_id(), user.getSu_password());
 
         if (loginUser != null) {
             httpSession.setAttribute("LOGINUSER", loginUser);

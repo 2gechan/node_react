@@ -14,14 +14,14 @@ import javax.persistence.*;
 public class UserDto {
 
     @Id // Primary key
-    private String user_id;
+    private String su_id;
 
     @Column(nullable = false)
-    private String user_password;
+    private String su_password;
     @Column(nullable = false)
-    private String user_name;
+    private String su_name;
     @Column(nullable = false)
-    private String user_tel;
+    private String su_tel;
     @Column(nullable = false)
-    private String user_role; // 관리자, 판매자, 구매자
+    private String su_role; // 관리자, 판매자, 구매자
 }
