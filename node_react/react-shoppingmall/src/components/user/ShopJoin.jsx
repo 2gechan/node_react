@@ -1,20 +1,38 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { joinUser } from "../../store/userSlice";
 
 const ShopJoin = (props) => {
-  const { user, axios, joinInputChangeHandler } = props;
+  const { axios } = props;
   const navigate = useNavigate();
+  // const [user, setUser] = useState({});
+
+  const user = useSelector((state) => state.userInfo.user);
+  const dispatch = useDispatch();
+
+  const joinInputChangeHandler = (e) => {
+    const { name, value } = e.target;
+    const updateUser = { ...user, [name]: value };
+    dispatch(joinUser(updateUser));
+
+    // setUser({ ...user, [name]: value });
+    console.log(name, value);
+    console.log(updateUser);
+  };
 
   const joinButtonClickHandler = async (e) => {
     console.log(user);
 
-    const response = await axios.post("/join", user);
+    // const response = await axios.post("/join", user);
 
-    console.log(response.status);
-    if (response.status === 200) {
-      navigate("/");
-    } else {
-      alert("회원가입에 실패했습니다.");
-    }
+    // console.log(response.status);
+    // if (response.status === 200) {
+    //   navigate("/");
+    // } else {
+    //   alert("회원가입에 실패했습니다.");
+    // }
   };
 
   return (
@@ -24,7 +42,7 @@ const ShopJoin = (props) => {
         <input
           type="text"
           placeholder="ID"
-          name="user_id"
+          name="su_id"
           onChange={joinInputChangeHandler}
         />
       </div>
@@ -33,7 +51,7 @@ const ShopJoin = (props) => {
         <input
           type="password"
           placeholder="PASSWORD"
-          name="user_password"
+          name="su_password"
           onChange={joinInputChangeHandler}
         />
       </div>
@@ -42,7 +60,7 @@ const ShopJoin = (props) => {
         <input
           type="text"
           placeholder="NAME"
-          name="user_name"
+          name="su_name"
           onChange={joinInputChangeHandler}
         />
       </div>
@@ -51,9 +69,28 @@ const ShopJoin = (props) => {
         <input
           type="text"
           placeholder="PHONE NUMBER"
-          name="user_tel"
+          name="su_tel"
           onChange={joinInputChangeHandler}
         />
+      </div>
+      <div className="join input">
+        <label htmlFor="">이용 목적</label>
+        <div>
+          <label>구매자</label>
+          <input
+            type="radio"
+            name="su_role"
+            onChange={joinInputChangeHandler}
+            value="구매자"
+          />
+          <label>판매자</label>
+          <input
+            type="radio"
+            name="su_role"
+            onChange={joinInputChangeHandler}
+            value="판매자"
+          />
+        </div>
       </div>
       <div className="join button">
         <button type="button" onClick={joinButtonClickHandler}>

@@ -5,14 +5,18 @@ import "./css/MainNav.css";
 import "./css/User.css";
 import "./css/MainJoin.css";
 
+import { Provider } from "react-redux";
+import store from "./store/store";
 function App() {
   return (
-    <div className="App">
-      <header>
-        <MainNav />
-      </header>
-      <Outlet />
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <header>
+          <MainNav />
+        </header>
+        <Outlet />
+      </div>
+    </Provider>
   );
 }
 

@@ -2,9 +2,14 @@ import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout } from "../store/loginSlice";
+
 const MainNav = () => {
+  const loginout = useSelector((state) => state.login.value);
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
-  const [logout, setlogout] = useState(false);
   const [divisible, setDivisible] = useState(false);
   const mouseOver = () => {
     setDivisible(true);
@@ -17,17 +22,16 @@ const MainNav = () => {
 
       if (!result) {
         console.log("로그인정보X");
-        setlogout(false);
       } else {
         console.log("로그인정보O");
-        setlogout(true);
+        dispatch(login());
       }
     };
     fetchData();
   });
 
   const logoutClick = async () => {
-    setlogout(false);
+    dispatch(logout());
     await axios.post("/logout");
     navigate("/");
   };
@@ -60,14 +64,13 @@ const MainNav = () => {
             <NavLink to="/join">
               <span>JOIN</span>
             </NavLink>
-            {logout ? (
-              <span onClick={logoutClick}>LOGOUT</span>
-            ) : (
+            {loginout ? (
               <NavLink to="/login">
                 <span>LOGIN</span>
               </NavLink>
+            ) : (
+              <span onClick={logoutClick}>LOGOUT</span>
             )}
-
             <NavLink to="/mypage">
               <span>MYPAGE</span>
             </NavLink>
