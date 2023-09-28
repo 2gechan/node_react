@@ -1,6 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { setCurruntUser } from "../../store/curruntUserSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const ShopLogin = (props) => {
+  const curruntUser = useSelector((state) => state.curruntUser.curruntUser);
+
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const { axios, useState, setCurrentUser } = props;
   const [loginUser, setLoginUser] = useState({});
@@ -12,7 +18,7 @@ const ShopLogin = (props) => {
   };
 
   const loginButtonClickHandler = async (e) => {
-    // console.log(loginUser);
+    console.log(loginUser);
     const response = await axios.post("/login", loginUser);
 
     if (response.status === 200) {
@@ -27,14 +33,16 @@ const ShopLogin = (props) => {
         const login = JSON.parse(strResult);
         const settingUser = (login) => {
           return setCurrentUser({
-            user_id: login.user_id,
-            user_password: login.user_password,
-            user_name: login.user_name,
-            user_tel: login.user_tel,
+            su_id: login.su_id,
+            su_password: login.su_password,
+            su_name: login.su_name,
+            su_tel: login.su_tel,
+            su_role: login.su_role,
           });
         };
         await settingUser(login);
-        // console.log(currentUser);
+        dispatch(setCurruntUser(login));
+
         navigate("/");
       }
     }
@@ -46,7 +54,7 @@ const ShopLogin = (props) => {
         <input
           type="text"
           placeholder="아이디"
-          name="user_id"
+          name="su_id"
           onChange={loginInputChangeHandler}
         />
       </div>
@@ -54,7 +62,7 @@ const ShopLogin = (props) => {
         <input
           type="text"
           placeholder="비밀번호"
-          name="user_password"
+          name="su_password"
           onChange={loginInputChangeHandler}
         />
       </div>

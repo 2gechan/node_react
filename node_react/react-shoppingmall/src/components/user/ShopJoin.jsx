@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+// import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { joinUser } from "../../store/userSlice";
@@ -25,14 +25,14 @@ const ShopJoin = (props) => {
   const joinButtonClickHandler = async (e) => {
     console.log(user);
 
-    // const response = await axios.post("/join", user);
+    const response = await axios.post("/join", user);
 
-    // console.log(response.status);
-    // if (response.status === 200) {
-    //   navigate("/");
-    // } else {
-    //   alert("회원가입에 실패했습니다.");
-    // }
+    console.log(response.status);
+    if (response.status === 200) {
+      navigate("/");
+    } else {
+      alert("회원가입에 실패했습니다.");
+    }
   };
 
   return (

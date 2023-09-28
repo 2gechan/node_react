@@ -1,15 +1,13 @@
-header {
+div.header.title {
+  margin: 30px auto;
+  width: 96%;
   display: flex;
-  padding: 3rem;
-  border-bottom: 1px solid #ddd;
-  height: 15%;
+  flex-direction: column;
+  justify-content: center;
 }
-
-header h1 {
-  flex: 2;
-  color: #aaa;
-  margin-right: 100px;
-}
+/* div.userInfo {
+  margin-left: auto;
+} */
 
 ul.main.menu {
   flex: 8;
@@ -22,7 +20,8 @@ ul.main.menu {
 ul.main.menu li {
   font-size: 20px;
   padding: 6px;
-  margin: 8px 15px;
+  margin: 8px 20px;
+  width: 6rem;
 }
 
 ul.main.menu li:hover {
@@ -30,8 +29,26 @@ ul.main.menu li:hover {
   border-bottom: 2px solid #ddd;
 }
 
-li.register div {
+ul.main.menu div.side.title:last-child {
+  display: flex;
+  margin-left: auto;
+}
+
+li.register div.user,
+li.registermenu div.register {
   margin-top: 10px;
   display: flex;
   flex-direction: column;
+}
+
+li.categorymenu div.category,
+li.registermenu div.register {
+  margin-top: 6px;
+  display: none;
+  flex-direction: column;
+}
+
+li.categorymenu:hover div.category,
+li.registermenu:hover div.register {
+  display: flex;
 }

@@ -16,10 +16,11 @@ const MyPage = (props) => {
         const login = JSON.parse(data);
         const settingUser = (login) => {
           return setCurrentUser({
-            user_id: login.user_id,
-            user_password: login.user_password,
-            user_name: login.user_name,
-            user_tel: login.user_tel,
+            su_id: login.su_id,
+            su_password: login.su_password,
+            su_name: login.su_name,
+            su_tel: login.su_tel,
+            su_role: login.su_role,
           });
         };
         await settingUser(login);
@@ -32,20 +33,29 @@ const MyPage = (props) => {
     <div>
       <div>
         <label>아이디</label>
-        {currentUser.user_id}
+        {currentUser.su_id}
       </div>
       <div>
         <label>패스워드</label>
-        {currentUser.user_password}
+        {currentUser.su_password}
       </div>
       <div>
         <label>이름</label>
-        {currentUser.user_name}
+        {currentUser.su_name}
       </div>
       <div>
         <label>전화번호</label>
-        {currentUser.user_tel}
+        {currentUser.su_tel}
       </div>
+      <div>
+        <label>권한</label>
+        {currentUser.su_role}
+      </div>
+      {currentUser.su_role === "판매자" ? (
+        <button>상품 등록하기</button>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

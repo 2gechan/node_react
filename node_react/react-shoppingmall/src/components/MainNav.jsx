@@ -1,18 +1,25 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import HeaderTitle from "./headerTitle";
 
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "../store/loginSlice";
+// import { setCurruntUser } from "../store/curruntUserSlice";
 
 const MainNav = () => {
   const loginout = useSelector((state) => state.login.value);
+  const curruntUser = useSelector((state) => state.curruntUser.curruntUser);
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  const [divisible, setDivisible] = useState(false);
+  const [registerMenu, setRegisterMenu] = useState(false);
   const mouseOver = () => {
-    setDivisible(true);
+    setRegisterMenu(true);
+  };
+  const mouseLeave = () => {
+    setRegisterMenu(false);
   };
 
   useEffect(() => {
@@ -28,7 +35,7 @@ const MainNav = () => {
       }
     };
     fetchData();
-  });
+  }, [dispatch]);
 
   const logoutClick = async () => {
     dispatch(logout());
@@ -36,49 +43,58 @@ const MainNav = () => {
     navigate("/");
   };
 
-  const mouseLeave = () => {
-    setDivisible(false);
-  };
   return (
     <>
-      <h1>ShoppingMall</h1>
+      <HeaderTitle />
       <ul className="main menu">
         <NavLink to="/">
           <li>HOME</li>
         </NavLink>
-
-        <NavLink to="/best">
-          <li>BEST</li>
-        </NavLink>
-        <li>TOP</li>
-        <li>BOTTOM</li>
-        <li>CART</li>
-        <li>후기</li>
-        <li>고객센터</li>
-        <li className="register" onMouseOverCapture={mouseOver}>
-          MEMBER
-          <div
-            style={{ display: divisible ? "flex" : "none" }}
-            onMouseLeave={mouseLeave}
-          >
-            <NavLink to="/join">
-              <span>JOIN</span>
+        <li className="categorymenu">
+          카테고리
+          <div className="category">
+            <NavLink to="/best">
+              <span>BEST</span>
             </NavLink>
-            {loginout ? (
-              <NavLink to="/login">
-                <span>LOGIN</span>
-              </NavLink>
-            ) : (
-              <span onClick={logoutClick}>LOGOUT</span>
-            )}
-            <NavLink to="/mypage">
-              <span>MYPAGE</span>
-            </NavLink>
+            <span>TOP</span>
+            <span>BOTTOM</span>
           </div>
         </li>
-        <NavLink to="/cart">
-          <li>CART</li>
-        </NavLink>
+
+        <li className="registermenu">
+          MEMBER
+          <div className="register">
+            {loginout ? (
+              <>
+                <NavLink to="/join">
+                  <span>JOIN</span>
+                </NavLink>
+                <NavLink to="/login">
+                  <span>LOGIN</span>
+                </NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink to="/">
+                  <span onClick={logoutClick}>LOGOUT</span>
+                </NavLink>
+                <NavLink to="/mypage">
+                  <span>MYPAGE</span>
+                </NavLink>
+              </>
+            )}
+          </div>
+        </li>
+
+        <li>고객센터</li>
+        <div className="side title">
+          <li>
+            <span>{curruntUser.su_name}</span>
+          </li>
+          <NavLink to="/cart" className="cart">
+            <li>CART</li>
+          </NavLink>
+        </div>
       </ul>
     </>
   );
