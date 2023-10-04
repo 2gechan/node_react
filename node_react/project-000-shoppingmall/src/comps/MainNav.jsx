@@ -13,6 +13,9 @@ const MainNav = () => {
         <NavLink to="/login">
           <li>Login</li>
         </NavLink>
+        <NavLink to="/product">
+          <li>Product</li>
+        </NavLink>
       </ul>
     </>
   );

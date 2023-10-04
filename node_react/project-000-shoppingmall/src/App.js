@@ -10,7 +10,9 @@ function App() {
       <header>
         <MainNav />
       </header>
-      <Outlet />
+      <div className="body">
+        <Outlet />
+      </div>
     </div>
   );
 }

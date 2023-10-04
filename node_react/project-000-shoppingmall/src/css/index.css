@@ -17,4 +17,10 @@ body {
 a {
   font-style: inherit;
   text-decoration: none;
+  color: green;
+  margin: 5px;
+}
+
+a:hover {
+  border-bottom: 1px solid black;
 }
