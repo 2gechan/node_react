@@ -5,10 +5,17 @@ import com.shop.service.FileService;
 import com.shop.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 @Slf4j
@@ -57,4 +64,22 @@ public class ProductController {
         log.debug("리스트들 {}", productService.selectAll());
         return productService.selectAll();
     }
+
+//    @Value("${image.path}")
+//    private String imagePath;
+
+//    @GetMapping("/images/{imageName}")
+//    public ResponseEntity<byte[]> getImage(@PathVariable String imageName) throws IOException {
+//        File file = new File(imagePath, imageName);
+//        if (!file.exists()) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        byte[] imageBytes = Files.readAllBytes(file.toPath());
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.IMAGE_JPEG); // 이미지 타입에 따라 설정
+//
+//        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
+//    }
 }

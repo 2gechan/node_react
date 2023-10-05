@@ -20,11 +20,11 @@ const ProductList = () => {
   }, []);
 
   const productList = list.map((item) => {
-    const imagePath = `/Users/isechan/Documents/workspace/files/${item.p_main_image}`;
+    const imagePath = `http://localhost:8080/static/${item.p_main_image}`;
     return (
-      <div>
+      <div key={item.p_seq}>
         <label>상품이름 : </label>
-        <span key={item.p_seq}>{item.p_name}</span>
+        <span>{item.p_name}</span>
         <label> 상품가격 : </label>
         <span>{item.p_price}</span>
         <label> 상품수량 : </label>
