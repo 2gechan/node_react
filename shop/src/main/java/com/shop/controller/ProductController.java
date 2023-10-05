@@ -3,6 +3,7 @@ package com.shop.controller;
 import com.shop.models.ProductDto;
 import com.shop.service.FileService;
 import com.shop.service.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.util.List;
 
+@Slf4j
 @CrossOrigin("http://localhost:3000")
 @RestController
 public class ProductController {
@@ -52,6 +54,7 @@ public class ProductController {
 
     @GetMapping("product")
     public List<ProductDto> allProduct() {
+        log.debug("리스트들 {}", productService.selectAll());
         return productService.selectAll();
     }
 }

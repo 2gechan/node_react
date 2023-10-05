@@ -39,10 +39,10 @@ public class FileServiceImpl implements FileService {
         String fileName = file.getOriginalFilename();
 
         // java에서 제공하는 uuid를 생성하는 코드
-        // String strUUID = UUID.randomUUID().toString();
+         String strUUID = UUID.randomUUID().toString();
 
         // UUID 키 값 파일 이름과 합성하여 새로운 이름으로 변형
-        // fileName = String.format("%s-%s", strUUID, fileName);
+         fileName = String.format("%s-%s", strUUID, fileName);
         File uploadFile = new File(path, fileName);
         file.transferTo(uploadFile);
 

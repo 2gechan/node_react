@@ -7,24 +7,20 @@ const AddItem = () => {
   const imageRef = useRef(null);
   const imagesRef = useRef(null);
 
-  const addProduct = () => {
+  const addProduct = async () => {
     const formData = new FormData();
 
     for (const key in product) {
       formData.append(key, product[key]);
     }
     formData.append("p_main_image", imageRef.current.files[0]);
-    console.log(formData);
-    fetch("/addItem", {
+
+    const res = await fetch("/addItem", {
       method: "POST",
       body: formData,
-    }).then((response) => {
-      if (response.ok) {
-        console.log("상품 추가 성공");
-      } else {
-        console.log("상품 추가 실패");
-      }
     });
+    const data = await res.json();
+    console.log(data);
   };
 
   const inputChangeHandler = (e) => {
