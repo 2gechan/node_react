@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 const ProductList = () => {
   const [list, setList] = useState([]);
   const navigate = useNavigate();
@@ -21,17 +21,16 @@ const ProductList = () => {
 
   const productList = list.map((item) => {
     const imagePath = `http://localhost:8080/static/${item.p_main_image}`;
+    const detailLink = `/product/detail/${item.p_seq}`;
     return (
       <div key={item.p_seq}>
+        <NavLink to={detailLink}>
+          <img src={imagePath} alt="상품" width="100px" height="100px" />
+        </NavLink>
         <label>상품이름 : </label>
         <span>{item.p_name}</span>
         <label> 상품가격 : </label>
         <span>{item.p_price}</span>
-        <label> 상품수량 : </label>
-        <span>{item.p_qty}</span>
-        <label> 카테고리 : </label>
-        <span>{item.p_category}</span>
-        <img src={imagePath} alt="상품" width="100px" height="100px" />
       </div>
     );
   });

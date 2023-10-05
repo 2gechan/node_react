@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 const AddItem = () => {
   const [product, setProduct] = useState({});
   const [image, setImage] = useState("");
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState([]);
   const imageRef = useRef(null);
   const imagesRef = useRef(null);
 
@@ -14,6 +14,10 @@ const AddItem = () => {
       formData.append(key, product[key]);
     }
     formData.append("p_main_image", imageRef.current.files[0]);
+
+    for (const file of imagesRef.current.files) {
+      formData.append("images", file);
+    }
 
     const res = await fetch("/addItem", {
       method: "POST",
@@ -31,6 +35,7 @@ const AddItem = () => {
 
   const fileChangeHandler = (e) => {
     const file = e.target.files[0];
+
     const fileReader = new FileReader();
     fileReader.onload = (fe) => {
       setImage(fe.target.result);
@@ -43,14 +48,20 @@ const AddItem = () => {
   const filesChangeHnadler = (e) => {
     const files = e.target.files;
     console.log(files.length);
+    const newImages = [];
+
     Array.from(files).forEach((file) => {
       const fileReader = new FileReader();
       fileReader.onloadend = (fe) => {
-        setImages((images) => [...images, fe.target.result]);
+        newImages.push(fe.target.result); // 이미지를 새로운 배열에 추가
+        setImages(newImages); // 상태 업데이트
       };
       fileReader.readAsDataURL(file);
     });
   };
+  const subImages = images.map((image, index) => (
+    <img key={index} src={image ? image : ""} width="100px" />
+  ));
   return (
     <div className="main form">
       <h1>아이템 추가</h1>
@@ -112,6 +123,7 @@ const AddItem = () => {
           onChange={filesChangeHnadler}
         />
       </div>
+      <div>{subImages}</div>
       <div>
         <button onClick={addProduct}>상품 추가</button>
       </div>

@@ -1,21 +1,14 @@
 package com.shop.controller;
 
+import com.shop.models.ImageVO;
 import com.shop.models.ProductDto;
 import com.shop.service.FileService;
+import com.shop.service.ImagesService;
 import com.shop.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 
 @Slf4j
@@ -25,10 +18,12 @@ public class ProductController {
 
     private final ProductService productService;
     private final FileService fileService;
+    private final ImagesService imagesService;
 
-    public ProductController(ProductService productService, FileService fileService) {
+    public ProductController(ProductService productService, FileService fileService, ImagesService imagesService) {
         this.productService = productService;
         this.fileService = fileService;
+        this.imagesService = imagesService;
     }
 
     @PostMapping("addItem")
@@ -36,7 +31,8 @@ public class ProductController {
                               @RequestParam("p_name") String p_name,
                               @RequestParam("p_qty") int p_qty,
                               @RequestParam("p_price") int p_price,
-                              @RequestParam("p_main_image")MultipartFile p_main_image) {
+                              @RequestParam("p_main_image")MultipartFile p_main_image,
+                              @RequestParam("images")MultipartFile[] images) {
         ProductDto returnDto = new ProductDto();
         returnDto.setP_category(p_category);
         returnDto.setP_name(p_name);
@@ -48,14 +44,30 @@ public class ProductController {
             if (!p_main_image.getOriginalFilename().isEmpty()) {
                 String fileName = fileService.fileUp(p_main_image);
                 returnDto.setP_main_image(fileName);
+                productService.insert(returnDto);
+
+            }
+            for (MultipartFile image : images) {
+                if(!image.isEmpty()) {
+                    String fileName = fileService.fileUp(image);
+                    ImageVO imageVO = new ImageVO();
+                    imageVO.setI_image_name(fileName);
+                    long pseq = productService.findLastProduct();
+                    log.debug("마지막 인덱스 {}", pseq);
+                    imageVO.setI_pseq(pseq);
+
+                    imagesService.imagesInsert(imageVO);
+                }
+
             }
 
-        } catch (Exception e) {
+            } catch (Exception e) {
             e.printStackTrace();
         }
 
-        productService.insert(returnDto);
+
         System.out.println("returnDto = " + returnDto.toString());
+
         return returnDto;
     }
 
@@ -65,21 +77,11 @@ public class ProductController {
         return productService.selectAll();
     }
 
-//    @Value("${image.path}")
-//    private String imagePath;
+    @GetMapping("product/detail/detail")
+    public List<ImageVO> detailImages(@RequestParam("p_seq") String p_seq) {
+        long i_pseq = Integer.parseInt(p_seq);
+        List<ImageVO> detailImages = imagesService.detailImages(i_pseq);
+        return detailImages;
+    }
 
-//    @GetMapping("/images/{imageName}")
-//    public ResponseEntity<byte[]> getImage(@PathVariable String imageName) throws IOException {
-//        File file = new File(imagePath, imageName);
-//        if (!file.exists()) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        byte[] imageBytes = Files.readAllBytes(file.toPath());
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.IMAGE_JPEG); // 이미지 타입에 따라 설정
-//
-//        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
-//    }
 }

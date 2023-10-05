@@ -10,6 +10,9 @@ public interface ProductService {
 
     public ProductDto insert(ProductDto dto);
 
+    public long findLastProduct();
+
+
     public List<ProductDto> categoryList(String p_category);
 
     public void delete(String p_seq);

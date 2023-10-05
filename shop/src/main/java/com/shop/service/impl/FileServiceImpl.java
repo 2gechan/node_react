@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -51,6 +52,16 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<ImageVO> filesUp(MultipartHttpServletRequest files) throws Exception {
-        return null;
+        List<MultipartFile> imageList = files.getFiles("f_images");
+
+        List<ImageVO> returnFiles = new ArrayList<ImageVO>();
+        for (MultipartFile image : imageList) {
+            ImageVO imageVO = new ImageVO();
+
+            imageVO.setI_image_name(image.getOriginalFilename());
+
+            returnFiles.add(imageVO);
+        }
+        return returnFiles;
     }
 }

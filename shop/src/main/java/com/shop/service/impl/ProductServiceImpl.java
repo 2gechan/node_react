@@ -1,5 +1,6 @@
 package com.shop.service.impl;
 
+import com.shop.models.ImageVO;
 import com.shop.models.ProductDto;
 import com.shop.repository.ProductRepository;
 import com.shop.service.ProductService;
@@ -22,6 +23,11 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDto> selectAll() {
         List<ProductDto> allProductList = productRepository.findAll();
         return allProductList;
+    }
+
+    public long findLastProduct() {
+        long lastSeq = productRepository.count();
+        return lastSeq;
     }
 
     @Override

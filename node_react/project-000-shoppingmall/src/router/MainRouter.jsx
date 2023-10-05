@@ -6,6 +6,7 @@ import Home from "../comps/home";
 import JoinPage from "../comps/user/JoinPage";
 import ProductList from "../comps/product/ProductList";
 import AddItem from "../comps/product/AddItem";
+import ProductDetail from "../comps/product/ProductDetail";
 
 const MainRouter = () => {
   const router = createBrowserRouter([
@@ -25,11 +26,13 @@ const MainRouter = () => {
         {
           path: "/product",
           element: <ProductList />,
+          children: [],
         },
         {
           path: "/addItem",
           element: <AddItem />,
         },
+        { path: `/product/detail/:p_seq`, element: <ProductDetail /> },
       ],
     },
   ]);
