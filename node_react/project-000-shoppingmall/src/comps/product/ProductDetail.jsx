@@ -28,6 +28,10 @@ const ProductDetail = () => {
   return (
     <div>
       <h1>{p_seq}의 상세 페이지</h1>
+      <div>
+        <button>구매하기</button>
+        <button>장바구니 담기</button>
+      </div>
       <div>{detailImagesPrint}</div>
     </div>
   );
