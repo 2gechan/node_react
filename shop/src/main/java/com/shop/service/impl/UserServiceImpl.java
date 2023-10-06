@@ -60,9 +60,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto login(String u_id, String u_pw) {
         UserDto userDto = this.findById(u_id);
-        if(userDto == null) {
+        if (userDto == null) {
             return null;
-        } else if(userDto.getU_pw().equals(u_pw)) {
+        } else if (userDto.getU_pw().equals(u_pw)) {
             return userDto;
         }
         return null;

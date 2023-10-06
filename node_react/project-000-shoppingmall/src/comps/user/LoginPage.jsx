@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../store/CurrentUser";
+
 const LoginPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [loginUser, setLoginUser] = useState({});
+
   const loginInputChangeHandler = (e) => {
     const { name, value } = e.target;
     setLoginUser({ ...loginUser, [name]: value });
-
     console.log(name, value);
   };
 
@@ -22,7 +27,9 @@ const LoginPage = () => {
     try {
       if (res.status === 200) {
         const data = await res.json();
-        console.log(data);
+
+        dispatch(setCurrentUser(data));
+
         console.log("로그인 성공");
         navigate("/");
       } else {
@@ -37,6 +44,7 @@ const LoginPage = () => {
   return (
     <div>
       <h1>로그인페이지</h1>
+
       <div>
         <label>아이디</label>
         <input type="text" name="u_id" onChange={loginInputChangeHandler} />

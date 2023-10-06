@@ -1,19 +1,23 @@
 import { Outlet } from "react-router-dom";
-import "./css/App.css";
 import MainNav from "./comps/MainNav";
+import "./css/App.css";
 import "./css/MainNav.css";
 import "./css/join.css";
 
+import { Provider } from "react-redux";
+import store from "./store/store";
 function App() {
   return (
-    <div className="App">
-      <header>
-        <MainNav />
-      </header>
-      <div className="body">
-        <Outlet />
+    <Provider store={store}>
+      <div className="App">
+        <header>
+          <MainNav />
+        </header>
+        <div className="body">
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </Provider>
   );
 }
 
