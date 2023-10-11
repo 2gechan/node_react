@@ -1,0 +1,36 @@
+div.add {
+  margin: 2rem auto;
+  height: 600px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ddd;
+}
+
+div.add div.input,
+div.add div.textarea {
+  width: 80%;
+  margin: 5px;
+  display: flex;
+}
+
+div.textarea {
+  width: 80%;
+  height: 200px;
+  display: flex;
+}
+
+div.input label,
+div.textarea label {
+  text-align: right;
+  flex: 1;
+}
+div.input input,
+div.textarea textarea {
+  flex: 3;
+}
+
+div.input textarea {
+  height: 100px;
+}
