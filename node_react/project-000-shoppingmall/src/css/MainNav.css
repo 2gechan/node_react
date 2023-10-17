@@ -2,8 +2,20 @@ ul {
   display: flex;
   margin: 20px 20px;
   list-style: none;
+  /* background-color: blue; */
 }
 
 li {
   padding: 8px;
+  /* background-color: blue; */
+}
+
+li:hover {
+  border-bottom: 1px solid green;
+}
+
+div.cart {
+  border: 1px solid #ddd;
+  margin-top: 3px;
+  /* background-color: red; */
 }

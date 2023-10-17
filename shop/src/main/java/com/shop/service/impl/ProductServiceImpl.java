@@ -20,6 +20,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductDto findById(long p_seq) {
+        ProductDto product = productRepository.findById(p_seq).orElse(null);
+        return product;
+    }
+
+    @Override
     public List<ProductDto> selectAll() {
         List<ProductDto> allProductList = productRepository.findAll();
         return allProductList;

@@ -12,6 +12,7 @@ public interface ProductService {
 
     public long findLastProduct();
 
+    public ProductDto findById(long p_seq);
 
     public List<ProductDto> categoryList(String p_category);
 

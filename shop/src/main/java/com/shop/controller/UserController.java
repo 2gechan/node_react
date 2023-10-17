@@ -42,6 +42,7 @@ public class UserController {
     public UserDto curruntUser(HttpSession httpSession) {
         System.out.println("현재 유저 정보 요청");
         UserDto dto = (UserDto) httpSession.getAttribute("LOGINUSER");
+        // log.debug(dto.toString());
         return dto;
     }
 

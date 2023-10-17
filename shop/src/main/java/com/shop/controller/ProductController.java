@@ -84,4 +84,11 @@ public class ProductController {
         return detailImages;
     }
 
+    @GetMapping("product/detail/item_detail")
+    public ProductDto itemDetail(@RequestParam("p_seq") long p_seq) {
+        ProductDto product = productService.findById(p_seq);
+        log.debug("아이템 정보 요청");
+        return product;
+    }
+
 }
