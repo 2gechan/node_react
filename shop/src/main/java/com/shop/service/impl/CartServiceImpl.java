@@ -26,16 +26,15 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDto insert(ProductDto dto) {
-        // ProductDto product = productRepository.findById(dto.getC_pseq()).orElse(null);
-        CartDto cart_item = new CartDto();
-        cart_item.setC_pseq(dto.getP_seq());
-
-        // System.out.println("product = " + product);
-//        if (product != null) {
-//           // CartDto cartItem = cartRepository.save(dto);
-//            return cartItem;
-//        }
+    public CartDto insert(CartDto dto) {
+        ProductDto product = productRepository.findById(dto.getC_pseq()).orElse(null);
+        // System.out.println(product.toString());
+        if (product != null) {
+            CartDto cartItem = cartRepository.save(dto);
+            return cartItem;
+        } else {
+            System.out.println("상품없음");
+        }
         return null;
     }
 

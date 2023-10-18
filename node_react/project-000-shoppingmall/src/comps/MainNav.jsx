@@ -17,7 +17,7 @@ const MainNav = () => {
     setVisible(true);
   };
   const cartOff = () => {
-    setVisible(false);
+    if (visible) setVisible(false);
   };
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const MainNav = () => {
       } catch (error) {}
     };
     loadCart();
-  }, []);
+  }, [currentUser]);
 
   const loadUser = async () => {
     try {
@@ -90,7 +90,7 @@ const MainNav = () => {
         <NavLink to="/product" onClick={loadUser}>
           <li>Product</li>
         </NavLink>
-        {currentUser.u_name ? (
+        {currentUser.u_id ? (
           <>
             <NavLink to="/mypage">
               <li>{currentUser.u_name}</li>

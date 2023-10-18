@@ -4,6 +4,7 @@ const ProductDetail = () => {
   const { p_seq } = useParams();
   const [images, setImages] = useState([]);
   const [product, setProduct] = useState({});
+  const [cart, setCart] = useState({});
 
   useEffect(() => {
     const detailImages = async () => {
@@ -22,6 +23,7 @@ const ProductDetail = () => {
       const data = await res.json();
       console.log(data);
       setProduct(data);
+      setCart(data); // 서버 전송을 위한 state
     };
     productInfo();
     detailImages();
@@ -37,13 +39,13 @@ const ProductDetail = () => {
 
   const cart_in_item = async () => {
     try {
-      console.log(product);
+      console.log(cart);
       const res = fetch("addCart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(product),
+        body: JSON.stringify(cart),
       });
       if (res.status === 200) {
         console.log(res.data);
@@ -52,6 +54,12 @@ const ProductDetail = () => {
     } catch (error) {
       console.log("에러났음");
     }
+  };
+
+  const qtyInputHandler = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+    setCart({ ...cart, [name]: value });
   };
 
   return (
@@ -74,7 +82,12 @@ const ProductDetail = () => {
       <div>
         <label>남은수량 : </label>
         <span>{product.p_qty}</span>
-        <input type="number" placeholder="수량" />
+        <input
+          type="number"
+          placeholder="수량"
+          name="p_qty"
+          onChange={qtyInputHandler}
+        />
       </div>
       <div>
         <label>카테고리 : </label>

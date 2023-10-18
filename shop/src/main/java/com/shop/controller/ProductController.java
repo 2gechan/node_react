@@ -73,7 +73,7 @@ public class ProductController {
 
     @GetMapping("product")
     public List<ProductDto> allProduct() {
-        log.debug("리스트들 {}", productService.selectAll());
+        // log.debug("리스트들 {}", productService.selectAll());
         return productService.selectAll();
     }
 

@@ -42,8 +42,10 @@ public class CartController {
         if(user != null) {
             cart_item.setC_pseq(dto.getP_seq());
             cart_item.setC_uid(user.getU_id());
-            cart_item
-            CartDto item = cartService.insert();
+            cart_item.setC_amount(dto.getP_qty());
+            cart_item.setC_checked(0);
+            CartDto item = cartService.insert(cart_item);
+            return  item;
         }
 
 

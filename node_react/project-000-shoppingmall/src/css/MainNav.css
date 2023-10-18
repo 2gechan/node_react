@@ -1,13 +1,11 @@
 ul {
   display: flex;
-  margin: 20px 20px;
+  margin: 7px 20px;
   list-style: none;
-  /* background-color: blue; */
 }
 
 li {
   padding: 8px;
-  /* background-color: blue; */
 }
 
 li:hover {
@@ -17,5 +15,5 @@ li:hover {
 div.cart {
   border: 1px solid #ddd;
   margin-top: 3px;
-  /* background-color: red; */
+  padding: 5px;
 }
