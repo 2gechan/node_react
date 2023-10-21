@@ -1,0 +1,9 @@
+div.p_main_image_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div.p_main_list {
+  display: flex;
+}

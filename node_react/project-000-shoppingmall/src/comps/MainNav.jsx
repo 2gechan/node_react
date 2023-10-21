@@ -98,17 +98,21 @@ const MainNav = () => {
             <NavLink to="/cart" onMouseOver={cartOn} onMouseLeave={cartOff}>
               <li>Cart</li>
               {visible ? (
-                <div className="cart">
-                  {cart.map((item) => {
-                    return (
-                      <div key={item.c_seq}>
-                        <span>장바구니 번호 : {item.c_seq}</span>
-                        <span>상품 번호 : {item.c_pseq}</span>
-                        <span>상품 수량 : {item.c_amount}</span>
-                      </div>
-                    );
-                  })}
-                </div>
+                cart.length > 0 ? (
+                  <div className="cart">
+                    {cart.map((item) => {
+                      return (
+                        <div key={item.c_seq}>
+                          <span>장바구니 번호 : {item.c_seq}</span>
+                          <span>상품 번호 : {item.c_pseq}</span>
+                          <span>상품 수량 : {item.c_amount}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  ""
+                )
               ) : (
                 ""
               )}

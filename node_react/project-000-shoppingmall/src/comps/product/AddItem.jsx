@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddItem = () => {
+  const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const [image, setImage] = useState("");
   const [images, setImages] = useState([]);
@@ -25,12 +27,13 @@ const AddItem = () => {
     });
     const data = await res.json();
     console.log(data);
+    navigate("/product");
   };
 
   const inputChangeHandler = (e) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
-    console.log(name, value);
+    // console.log(name, value);
   };
 
   const fileChangeHandler = (e) => {

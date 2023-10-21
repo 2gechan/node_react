@@ -23,14 +23,12 @@ const ProductList = () => {
     const imagePath = `http://localhost:8080/static/${item.p_main_image}`;
     const detailLink = `/product/detail/${item.p_seq}`;
     return (
-      <div key={item.p_seq}>
+      <div key={item.p_seq} className="p_main_image_box">
         <NavLink to={detailLink}>
           <img src={imagePath} alt="상품" width="100px" height="100px" />
         </NavLink>
-        <label>상품이름 : </label>
         <span>{item.p_name}</span>
-        <label> 상품가격 : </label>
-        <span>{item.p_price}</span>
+        <span>{item.p_price}원</span>
       </div>
     );
   });
@@ -39,7 +37,7 @@ const ProductList = () => {
     <div>
       <h1>상품 리스트</h1>
       <button onClick={productAddButton}>상품 추가</button>
-      <div>{productList}</div>
+      <div className="p_main_list">{productList}</div>
     </div>
   );
 };

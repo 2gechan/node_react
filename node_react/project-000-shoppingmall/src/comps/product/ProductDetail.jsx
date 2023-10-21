@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 const ProductDetail = () => {
   const { p_seq } = useParams();
   const [images, setImages] = useState([]);
@@ -8,7 +8,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     const detailImages = async () => {
-      console.log(p_seq);
+      // console.log(p_seq);
       const res = await fetch(`detail?p_seq=${p_seq}`, {
         method: "GET",
       });
@@ -21,7 +21,7 @@ const ProductDetail = () => {
         method: "GET",
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       setProduct(data);
       setCart(data); // 서버 전송을 위한 state
     };
@@ -48,8 +48,9 @@ const ProductDetail = () => {
         body: JSON.stringify(cart),
       });
       if (res.status === 200) {
-        console.log(res.data);
-        console.log("장바구니 아이템 추가 성공");
+        // console.log(res.data);
+        // console.log("장바구니 아이템 추가 성공");
+        alert("장바구니 추가 성공");
       }
     } catch (error) {
       console.log("에러났음");
@@ -58,23 +59,14 @@ const ProductDetail = () => {
 
   const qtyInputHandler = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
+    // console.log(name, value);
     setCart({ ...cart, [name]: value });
   };
 
   return (
     <div>
-      <h1>{p_seq}의 상세 페이지</h1>
-      <div>
-        <div>
-          <label>상품번호 : </label>
-          <span>{product.p_seq}</span>
-        </div>
-        <div>
-          <label>상품이름 : </label>
-          <span>{product.p_name}</span>
-        </div>
-      </div>
+      <h1>{product.p_name}</h1>
+
       <div>
         <label>상품가격 : </label>
         <span>{product.p_price}</span>
@@ -96,6 +88,9 @@ const ProductDetail = () => {
       <div>
         <button>구매하기</button>
         <button onClick={cart_in_item}>장바구니 담기</button>
+        <button>
+          <NavLink to="/product">뒤로가기</NavLink>
+        </button>
       </div>
       <div>{detailImagesPrint}</div>
     </div>

@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <header>
       <h1>안녕하세요</h1>
-      <p>{message}</p>
+      <p>쇼핑몰에 오신걸 환영합니다.</p>
     </header>
   );
 };
